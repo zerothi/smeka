@@ -30,11 +30,6 @@ CFLAGS ?=
 CXXFLAGS ?=
 FFLAGS ?=
 
-# Default pre-processor commands
-# (probably we should do a check to ensure
-#  it works)
-CPP ?= cpp -E -P -C -nostdinc
-
 # Default vendor setting
 VENDOR ?= gnu
 
@@ -123,12 +118,6 @@ show::
 	@echo "  MPIFC    = $(MPIFC)"
 	@echo "  FFLAGS   = $(FFLAGS)"
 	@echo ""
-	@echo "  CPP      = $(CPP)"
-	@echo "  CPPFLAGS = $(CPPFLAGS)"
-	@echo "  INCLUDES = $(INCLUDES)"
-	@echo ""
-	@echo "Installation prefixes:"
-	@echo "  PREFIX   = $(PREFIX)"
 
 
 # Define the default compilation options:

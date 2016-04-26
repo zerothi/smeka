@@ -16,7 +16,7 @@ ETC_DIR ?= $(PREFIX)/etc          # additional files (settings etc.)
 
 # Print out settings from this file
 settings::
-	@echo "Directory settings"
+	@echo "Directory settings:"
 	@echo "Prefix            (PREFIX) : $(PREFIX)"
 	@echo "Includes         (INC_DIR) : $(INC_DIR)"
 	@echo "Fortran modules (FMOD_DIR) : $(FMOD_DIR)"

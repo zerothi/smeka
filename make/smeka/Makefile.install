@@ -1,5 +1,5 @@
 _SMEKA_install = 1
-.PHONY: install install_libraries install_init_dir uninstall
+.PHONY: install install_libraries install_init_dir uninstall show
 
 # Basic implementation of installing the different
 # libraries etc.

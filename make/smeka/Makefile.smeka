@@ -3,6 +3,9 @@ _SMEKA_smeka = 1
 # Reset the suffixes
 .SUFFIXES:
 
+# OS settings
+include $(TOP_DIR)/$(SMEKA_DIR)/Makefile.os
+
 # Common variables, needs pre-loading before the user
 # includes
 include $(TOP_DIR)/$(SMEKA_DIR)/Makefile.common
@@ -30,6 +33,9 @@ include $(TOP_DIR)/$(SMEKA_DIR)/Makefile.directory
 
 # Add compiler specific options
 include $(TOP_DIR)/$(SMEKA_DIR)/Makefile.compiler
+
+# Add preprocessor definitions
+include $(TOP_DIR)/$(SMEKA_DIR)/Makefile.pp
 
 # Add library specific options
 include $(TOP_DIR)/$(SMEKA_DIR)/Makefile.library
