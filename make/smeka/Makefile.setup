@@ -1,4 +1,5 @@
 _SMEKA_setup = 1
+.PHONY: settings setup-list
 
 # This smeka file has two purposes:
 #
@@ -16,8 +17,6 @@ _SMEKA_setup = 1
 #       smeka/setup/*.make
 #    folder.
 
-
-.PHONY: settings setup-list
 
 #
 # Detect whether the user requests
@@ -45,21 +44,21 @@ ifdef SETUP
 
 ifneq ("$(wildcard $(SETUP))","")
  # do nothing, direct inclusion
-else ifneq ("$(wildcard setup.makes/$(SETUP))","")
- override SETUP = $(SMEKA_DIR)/setup/$(SETUP)
+else ifneq ("$(wildcard setup/$(SETUP))","")
+ override SETUP = setup/$(SETUP)
 else ifneq ("$(wildcard $(SETUP).make)","")
  override SETUP = $(SETUP).make
-else ifneq ("$(wildcard setup.makes/$(SETUP).make)","")
- override SETUP = $(SMEKA_DIR)/setup/$(SETUP).make
+else ifneq ("$(wildcard setup/$(SETUP).make)","")
+ override SETUP = setup/$(SETUP).make
 else
  # This is a small information utility
  $(info Could not find: ./$(SETUP))
- $(info Could not find: ./$(SMEKA_DIR)/setup/$(SETUP))
+ $(info Could not find: ./setup/$(SETUP))
  $(info Could not find: ./$(SETUP).make)
- $(info Could not find: ./$(SMEKA_DIR)/setup/$(SETUP).make)
+ $(info Could not find: ./setup/$(SETUP).make)
 
  # Print out the error messages for the user
- _TMP = $(subst .make,,$(subst ./$(SMEKA_DIR)/setup/,$(_NL)  ,$(wildcard ./$(SMEKA_DIR)/setup/*.make)))
+ _TMP = $(subst .make,,$(subst ./setup/,$(_NL)  ,$(wildcard ./setup/*.make)))
  $(info Available arguments are: $(_TMP))
  $(error Custom setup (SETUP=<>) file could not be located)
 endif
