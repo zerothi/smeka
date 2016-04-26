@@ -1,0 +1,65 @@
+_SMEKA_smeka = 1
+
+# Reset the suffixes
+.SUFFIXES:
+
+# Common variables, needs pre-loading before the user
+# includes
+include $(TOP_DIR)/$(SMEKA_DIR)/Makefile.common
+
+
+# Include project specific options
+# These will be pre-initialized before any user
+# settings.
+include $(TOP_DIR)/$(SMEKA_DIR)/Makefile.project
+
+
+# Pre definitions for this project (project defined)
+-include $(TOP_DIR)/$(SMEKA_DIR)/Makefile.pre
+
+
+# This setup file will ALSO include the
+# user defined setups.
+# Hence from this point on any global variables
+# should be ?= assigned.
+include $(TOP_DIR)/$(SMEKA_DIR)/Makefile.setup
+
+# Create the directories
+include $(TOP_DIR)/$(SMEKA_DIR)/Makefile.directory
+
+
+# Add compiler specific options
+include $(TOP_DIR)/$(SMEKA_DIR)/Makefile.compiler
+
+# Add library specific options
+include $(TOP_DIR)/$(SMEKA_DIR)/Makefile.library
+
+# Add the installation makefile
+include $(TOP_DIR)/$(SMEKA_DIR)/Makefile.install
+
+# Add the documentation makefile
+include $(TOP_DIR)/$(SMEKA_DIR)/Makefile.doc
+
+# Add the distribution creation tool
+include $(TOP_DIR)/$(SMEKA_DIR)/Makefile.dist
+
+# Add the test directory make file
+include $(TOP_DIR)/$(SMEKA_DIR)/Makefile.test
+
+# Add the clean make file
+include $(TOP_DIR)/$(SMEKA_DIR)/Makefile.clean
+
+
+# Post definitions for smeka (project defined)
+-include $(TOP_DIR)/$(SMEKA_DIR)/Makefile.post
+
+
+# Create the suffixes that Smeka provides
+.SUFFIXES: $(_SMEKA_SUFFIXES)
+
+
+
+
+# Local Variables:
+#  mode: makefile-gmake
+# End:

@@ -1,0 +1,26 @@
+_SMEKA_clean = 1
+
+# This smeka file has the purpose
+# of creation basic clean targets.
+
+.PHONY: clean clean-lib clean-src clean-mod clean-obj
+
+# Remove libraries
+clean-lib::
+	rm -f $(LIBRARIES)
+
+clean-src::
+	rm -f $(CPP_SOURCES)
+
+clean-mod::
+	rm -f $(FMOD_DIR)/*.mod $(FMOD_DIR)/*.MOD
+
+clean-obj::
+	rm -f $(OBJECTS)
+
+clean:: clean-lib clean-src clean-mod clean-obj
+
+
+# Local Variables:
+#  mode: makefile-gmake
+# End:

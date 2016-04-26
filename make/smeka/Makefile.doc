@@ -1,0 +1,11 @@
+_SMEKA_doc = 1
+.PHONY: doc
+
+# Create documentation.
+# Currently this should be user defined
+doc::
+
+
+# Local Variables:
+#  mode: makefile-gmake
+# End:

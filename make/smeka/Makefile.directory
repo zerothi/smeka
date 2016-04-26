@@ -1,0 +1,33 @@
+_SMEKA_directory = 1
+.PHONY: settings
+
+
+# Default directories
+PREFIX ?= $(HOME)/$(PROJECT_NAME)
+INC_DIR ?= $(PREFIX)/include      # Include directory (.h)
+FMOD_DIR ?= $(PREFIX)/$(INC_DIR)  # Module directory (.mod)
+BIN_DIR ?= $(PREFIX)/bin          # Executables
+LIB_DIR ?= $(PREFIX)/lib          # Library directory (.a/.so)
+SHARE_DIR ?= $(PREFIX)/share      # shared folder
+MAN_DIR ?= $(SHARE_DIR)/man       # Manual folder (man ***)
+PKG_DIR ?= $(LIB_DIR)/pkgconfig   # pkg-config files
+ETC_DIR ?= $(PREFIX)/etc          # additional files (settings etc.)
+
+
+# Print out settings from this file
+settings::
+	@echo "Directory settings"
+	@echo "Prefix            (PREFIX) : $(PREFIX)"
+	@echo "Includes         (INC_DIR) : $(INC_DIR)"
+	@echo "Fortran modules (FMOD_DIR) : $(FMOD_DIR)"
+	@echo "Binaries         (BIN_DIR) : $(BIN_DIR)"
+	@echo "Libraries        (LIB_DIR) : $(LIB_DIR)"
+	@echo "Shared         (SHARE_DIR) : $(SHARE_DIR)"
+	@echo "Man              (MAN_DIR) : $(MAN_DIR)"
+	@echo "pkg-config       (PKG_DIR) : $(PKG_DIR)"
+	@echo "etc.             (ETC_DIR) : $(ETC_DIR)"
+
+
+# Local Variables:
+#  mode: makefile-gmake
+# End:

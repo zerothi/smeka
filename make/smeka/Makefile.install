@@ -1,0 +1,39 @@
+_SMEKA_install = 1
+.PHONY: install install_libraries install_init_dir uninstall
+
+# Basic implementation of installing the different
+# libraries etc.
+
+
+.NOTPARALLEL: install
+install:: install_libraries
+
+
+.NOTPARALLEL: install_libraries
+install_libraries:: install_init_dir
+	install -pm$(_OCT_rwx_rx_rx) -t $(LIB_DIR) $(LIBRARIES)
+
+
+.NOTPARALLEL: install_init_dir
+install_init_dir::
+	@-mkdir -p $(INC_DIR)
+	@-mkdir -p $(LIB_DIR)
+	@-mkdir -p $(BIN_DIR)
+
+
+# Issuing uninstall will forcefully remove the installation directory
+.NOTPARALLEL: uninstall
+uninstall::
+	@echo ""
+	@echo "The directory tree:"
+	@echo "  $(PREFIX)"
+	@echo "will be deleted!"
+	@echo "You may abort the operation within 2 secs by pressing:"
+	@echo "  Ctrl+C or ^C"
+	@sleep 2
+	@rm -rf $(PREFIX)
+
+
+# Local Variables:
+#  mode: makefile-gmake
+# End:
