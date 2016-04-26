@@ -17,10 +17,6 @@ include $(TOP_DIR)/$(SMEKA_DIR)/Makefile.common
 include $(TOP_DIR)/$(SMEKA_DIR)/Makefile.project
 
 
-# Pre definitions for this project (project defined)
--include $(TOP_DIR)/$(SMEKA_DIR)/Makefile.pre
-
-
 # This setup file will ALSO include the
 # user defined setups.
 # Hence from this point on any global variables
@@ -56,8 +52,16 @@ include $(TOP_DIR)/$(SMEKA_DIR)/Makefile.test
 include $(TOP_DIR)/$(SMEKA_DIR)/Makefile.clean
 
 
+# There are two possibilities for post configuration
+# of the project.
+# Either in the smeka directory, or the top directory.
+# Both may be used.
+
 # Post definitions for smeka (project defined)
 -include $(TOP_DIR)/$(SMEKA_DIR)/Makefile.post
+
+# Post definitions for smeka (project defined)
+-include $(TOP_DIR)/Makefile.post
 
 
 # Create the suffixes that Smeka provides
