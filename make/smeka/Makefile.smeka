@@ -14,7 +14,7 @@ include $(TOP_DIR)/$(SMEKA_DIR)/Makefile.common
 # Include project specific options
 # These will be pre-initialized before any user
 # settings.
-include $(TOP_DIR)/$(SMEKA_DIR)/Makefile.project
+include $(TOP_DIR)/Makefile.project
 
 
 # This setup file will ALSO include the

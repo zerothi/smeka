@@ -1,21 +1,19 @@
-#
-# smeka Makefile setup
-#
+# SMEKASETTINGS (DO NOT DELETE)
+# DO NOT CHANGE CONTENT IN THIS BLOCK
+# IT MAY BE OVERWRITTEN WHEN REINSTALLING SMEKA
 #
 # This Makefile was created by smeka:
 #  github.com/zerothi/smeka
 
-
-# The top-directory of the Makefile/source tree
-# It *MUST* be the directory where the Makefile
-# is located.
+# Top-directory of Makefile/source tree
+# If need set, do so ABOVE this block!
 TOP_DIR ?= .
 
-# This is the directory where the smeka
-# generic files are stored (default to smeka)
-SMEKA_DIR = smeka
+# Directory of smeka default Makefiles
+SMEKA_DIR = %%SMEKA_DIR%%
 
 # Include the smeka settings!
 include $(TOP_DIR)/$(SMEKA_DIR)/Makefile.smeka
 
+# SMEKAENDSETTINGS (DO NOT DELETE)
 
