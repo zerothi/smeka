@@ -1,0 +1,351 @@
+#!/usr/bin/env bash
+
+# smeka setup script for installing
+# smeka in a project.
+
+# Implementation by:
+#  Nick R. Papior, 2016
+
+# Print out the help information for
+# this file.
+function print_help() {
+    echo "Usage: $0 [options]"
+    echo ""
+    echo "Required options:"
+    echo "  --directory"
+    echo "  --project (if performed on fresh project)"
+    echo ""
+    echo "Options:"
+    
+    echo "  -D|--directory <path>"
+    echo "    the project directory for the main Makefile"
+    echo "  -P|--project <name>"
+    echo "    project name (hard coded in the makefiles)"
+    
+    echo "  -v|--version <version>"
+    echo "    project version"
+    
+    echo "  --smeka-dir <relative path>"
+    echo "    the name of the path for the sub-makefiles"
+    echo "    created by smeka [$_smeka_dir]"
+    
+    echo "  --project-dir-smeka"
+    echo "    install the Makefile.project in the smeka directory"
+    echo "    (instead of in the same folder as the Makefile)"
+
+    echo "  -h|--help"
+    echo "    this help message"
+    
+}
+
+# Convert a path to a full path with prefixed
+# /
+# Hence
+#   ../this/dir
+# would be converted to (roughly)
+#   $(dirname $(pwd)/../this/dir)/dir
+function full_path() {
+    local path=$1
+    shift
+    
+    # Convert path to a full path (/.../) path
+    printf "%s" "$(cd $(dirname $path) && pwd -P)/$(basename $path)"
+    
+}
+
+# Common error exit codes
+_ERR_DIR=1
+_ERR_MAKEFILE=2
+_ERR_UNSET_PROJECT=3
+
+
+# This script directory
+# This may not work in all OS's.
+# For now this is fine.
+_cur_dir=$(full_path $(dirname $0))
+
+# Create a temporary directory ($$ == PID of current shell)
+_tmp_dir=$(mktemp -dt "$(basename $0).$$")
+
+# Default clean-up utility
+function clean_up() {
+    rm -rf $_tmp_dir
+}
+
+# Create default trap function
+function def_trap() {
+    clean_up 
+    echo "Exiting $0 before completion!!!"
+}
+
+
+# This is a no-op function
+function no_op() {
+    echo no-op > /dev/null
+}
+
+	   
+
+# Default options
+_smeka_dir=smeka
+_version=DONOTUSE
+_project_dir_smeka=0 # 0 = false, 1 = true
+
+# Options that are REQUIRED to be
+# set by the user.
+_project=
+_directory=
+
+while [ $# -gt 0 ]
+do
+    
+    # get the current option
+    opt=$1
+    shift
+    
+    case $opt in
+	
+	# Specify the installation directory
+	# This should be the root of the project
+	# files (where the Makefile should reside)
+	-D|--directory)
+	    _directory=$1
+	    shift
+	    ;;
+	
+	# The name of the project.
+	# This will be hard-coded into the Makefiles
+	# as the project name.
+	-P|--project)
+	    _project=$1
+	    shift
+	    ;;
+	
+	# Denote the version of the project
+	-v|--version)
+	    _version=$1
+	    shift
+	    ;;
+	
+	# Change the (relative) directory of the smeka files
+	--smeka-dir)
+	    _smeka_dir=$1
+	    shift
+	    ;;
+	
+	# Decide the placement of the Makefile.project
+	# file (default to same folder as Makefile)
+	--project-dir-smeka)
+	    _project_dir_smeka=1
+	    ;;
+
+	-h|--help)
+	    print_help
+	    exit 0
+	    ;;
+	
+    esac
+done
+
+
+
+
+
+
+# Begin actual installation of smeka
+err=0
+
+# 1. Check parameters
+if [ -z "$_directory" ]; then
+    echo "ERROR"
+    echo "Installing smeka REQUIRES the directory of the"
+    echo "parent project directory."
+    echo "Please add -D|--directory flag"
+    err=$_ERR_DIR
+fi
+if [ ! -d "$_directory" ]; then
+    echo "ERROR"
+    echo "Project directory:"
+    echo "  $_directory"
+    echo "does not exist."
+    echo "Please correct your input."
+    err=$_ERR_DIR
+fi
+
+# If there is an error the directory is erroneous
+[ $err -ne 0 ] && exit $err
+
+# Convert to full path
+_directory=$(full_path $_directory)
+
+# 2. Check whether the project directory
+# has an old installation of smeka.
+
+pushd $_directory > /dev/null
+trap "def_trap ; popd" SIGINT SIGTERM
+
+# Check if there is a Makefile
+previous_smeka=0
+if [ -e Makefile ]; then
+    previous_smeka=1
+fi
+
+if [ $previous_smeka -eq 1 ]; then
+    # Check that it is a smeka Makefile
+    # If it isn't we do not allow installing
+    # smeka.
+    # The project should be:
+    #  1) a clean (no Makefile) directory
+    #  2) Having a previous installed smeka installation
+    grep "SMEKASETTINGS" Makefile > /dev/null
+    rval=$?
+    if [ $rval -ne 0 ]; then
+	echo "ERROR!"
+	echo "An existing Makefile exists which is not a"
+	echo "smeka Makefile."
+	echo "Please rename your original Makefile and re-run."
+	err=$_ERR_MAKEFILE
+    fi
+fi
+    
+popd > /dev/null
+[ $err -ne 0 ] && exit $err
+
+
+
+######################
+## Proceed with the ##
+##  installation!   ##
+######################
+
+
+# Move to head of this CMD
+# Also assign a trap to popd
+pushd $_directory > /dev/null
+trap "def_trap ; popd" SIGINT SIGTERM
+
+if [ $previous_smeka -eq 1 ]; then
+    # Re-create the makefile with content of smeka
+    tmp_make=$_tmp_dir/Makefile
+    in_smeka=0
+    while read -r line
+    do
+	
+	case $line in
+
+	    # If detecting SMEKASETTINGS
+	    # We overwrite the content with the
+	    # smeka Makefile and continue reading
+	    *SMEKASETTINGS*)
+		sed -e "s:%%SMEKA_DIR%%:$_smeka_dir:" \
+		    $_cur_dir/make/Makefile >> $tmp_make
+		in_smeka=1
+		;;
+
+	    # We are done with reading the
+	    # smeka files
+	    *SMEKAENDSETTINGS*)
+		in_smeka=0
+		;;
+
+	    # Lines not part of smeka,
+	    # or if in smeka, we skip them.
+	    *)
+		if [ $in_smeka -eq 0 ]; then
+		    echo "$line" >> $tmp_make
+		fi
+		;;
+	esac
+
+    done < "Makefile"
+
+    # Remove the old Makefile and re-install the
+    # currently created makefile
+    # Now the makefile has been created
+    # and we wish to move it
+    mv -f $tmp_make Makefile
+    
+elif [ -z "_project" ]; then
+
+    # Error, the project name hasn't been set.
+    echo "ERROR"
+    echo "For a fresh smeka installation the project name"
+    echo "is REQUIRED information."
+    echo "Please see:"
+    echo "   $0 --help"
+    echo "on how to set the project name."
+    exit $_ERR_UNSET_PROJECT
+
+else
+
+    # The Makefile does not exist, copy it
+    cp $_cur_dir/make/Makefile Makefile
+    
+fi
+
+# Ensure the smeka Makefile directory exists...
+# This command will create both the smeka-directory
+# AND the vendor folder... :)
+mkdir -p $_smeka_dir/vendor
+
+
+# Copy the files (except Makefile.project)
+# to the smeka directory
+for f in $_cur_dir/make/smeka/*.*
+do
+    # Skip the Makefile.project
+    # It needs special attention
+    [ "$f" == Makefile.project ] && continue
+
+    # Make sure we overwrite old files
+    cp -f $f $_smeka_dir/
+
+done
+
+# Copy the vendor files
+# WE ALWAYS DO THIS
+# We issue a warning if a file is overwritten!
+for f in $_cur_dir/make/smeka/vendor/*
+do
+    bf=$(basename $f)
+    
+    # Issue warning if already existing
+    if [ -e $_smeka_dir/vendor/$bf ]; then
+	echo "Vendor file '$bf' is being overwritten (this may be neglected when updating smeka)"
+    fi
+
+    # Make sure we overwrite old files
+    cp -f $f $_smeka_dir/vendor/
+    
+done
+
+
+# If the project file does not exists, perform sed and create
+if [ -e Makefile.project ]; then
+    
+    # We need not do anything.
+    # Everything has been set previously by the user
+    # ASSUMEDLY
+    no_op
+    
+else
+
+    # The Makefile.project file does not exist.
+    # Here the file is created.
+    sed "s:%%VERSION%%:$_version:;s:%%PROJECT%%:$_project:" \
+	$_cur_dir/make/Makefile.project > Makefile.project
+    
+fi
+
+
+popd > /dev/null
+
+
+# Clean-up script
+clean_up
+
+exit 0
+
+# Local Variables:
+#  mode: bash
+# End:
