@@ -7,6 +7,9 @@ _SMEKA_pp = 1
 # Default pre-processor commands
 # (probably we should do a check to ensure
 #  it works)
+CPP ?= cpp
+CPPFLAGS ?= -E -P -C -nostdinc
+
 ifeq ($(uname_S),Linux)
 endif
 ifeq ($(uname_S),Darwin)

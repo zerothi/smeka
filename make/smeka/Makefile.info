@@ -1,0 +1,22 @@
+_SMEKA_info = 1
+
+# Make target to inform user about
+# possible default env-vars that control the
+# smeka installation procedure
+smeka:
+	@echo "Default smeka command line variables:"
+	@echo "  OPT=none|debug|weak|medium|hard"
+	@echo "    define the optimization level of the compiler"
+	@echo "  VENDOR=gnu|intel"
+	@echo "    compiler vendor, defines the standard compiler variables"
+	@echo "    (comes in C/CXX/F_VENDOR variants to control them individually)"
+	@echo "  PIC=1|0"
+	@echo "    if 1 implicitly add the position independent code flag (from vendor)"
+	@echo "  SETUP=<file>"
+	@echo "    includes <file> in the Makefile project"
+	@echo "    this may hold any custom changes to the build system"
+
+
+# Local Variables:
+#  mode: makefile-gmake
+# End:

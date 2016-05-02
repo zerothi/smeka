@@ -84,6 +84,13 @@ else
 
 endif
 
+# If requested add the PIC code flag
+ifeq ($(PIC),1)
+CFLAGS += $(V_PIC)
+CXXFLAGS += $(V_PIC)
+FFLAGS += $(V_PIC)
+endif
+
 
 # Generic compiler options
 CC := $(V_CC)

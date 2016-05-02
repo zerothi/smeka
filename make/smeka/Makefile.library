@@ -25,11 +25,11 @@ show::
 
 
 # Define the default library creation options
-%.a: %.o
-	$(AR) $(ARFLAGS) $@ $<
+%.a::
+	$(AR) $(ARFLAGS) $@ $^
 	$(RANLIB) $(RANLIBFLAGS) $@
-%.so: %.o
-	$(CC) -shared -o $@ $(CFLAGS) $(LDFLAGS) $<
+%.so::
+	$(CC) -shared -o $@ $(CFLAGS) $(LDFLAGS) $^
 
 
 # Local Variables:

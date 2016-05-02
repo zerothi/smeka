@@ -62,6 +62,12 @@ include $(TOP_DIR)/$(SMEKA_DIR)/Makefile.clean
 -include $(TOP_DIR)/Makefile.post
 
 
+# Information settings
+# call:
+#   make smeka
+# for details
+include $(TOP_DIR)/$(SMEKA_DIR)/Makefile.info
+
 # Create the suffixes that Smeka provides
 .SUFFIXES: $(_SMEKA_SUFFIXES)
 

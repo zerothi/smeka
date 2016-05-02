@@ -12,6 +12,11 @@ FFLAGS =
 CPP = cpp 
 CPPFLAGS = -E -P -C -nostdinc 
 
+AR = ar
+ARFLAGS = -ru
+RANLIB = ranlib
+RANLIBFLAGS = 
+
 # Local Variables:
 #  mode: makefile-gmake
 # End:
