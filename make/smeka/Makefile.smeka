@@ -55,9 +55,6 @@ include $(TOP_DIR)/$(SMEKA_DIR)/Makefile.clean
 # Both may be used.
 
 # Post definitions for smeka (project defined)
--include $(TOP_DIR)/$(SMEKA_DIR)/Makefile.post
-
-# Post definitions for smeka (project defined)
 -include $(TOP_DIR)/Makefile.post
 
 

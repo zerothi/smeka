@@ -16,4 +16,3 @@ SMEKA_DIR = %%SMEKA_DIR%%
 include $(TOP_DIR)/$(SMEKA_DIR)/Makefile.smeka
 
 # SMEKAENDSETTINGS (DO NOT DELETE)
-

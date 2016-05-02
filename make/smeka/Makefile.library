@@ -1,7 +1,7 @@
 _SMEKA_library = 1
 
 # Libraries are so/a files.
-_SMEKA_SUFFIXES += .so .a
+_SMEKA_SUFFIXES := $(_SMEKA_SUFFIXES) .so .a
 
 # Default library options
 

@@ -18,7 +18,7 @@ _SMEKA_compiler = 1
 # If a user requires other sources, they need
 # to add themselves.
 # smeka supports these files:
-_SMEKA_SUFFIXES += .f90 .F90 .c .cc .cpp
+_SMEKA_SUFFIXES := $(_SMEKA_SUFFIXES) .f90 .F90 .c .cc .cpp
 
 # Default compiler options
 # I am a bit split whether we should make a "default"
@@ -121,16 +121,16 @@ show::
 
 
 # Define the default compilation options:
-.F90.o:
+%.o: %.F90
 	$(CPP) $(CPPFLAGS) $(FPPFLAGS) $< > $(<:.F90=_cpp.f90)
 	$(FC) -c -o $@ $(FFLAGS) $(INCLUDES) $(<:.F90=_cpp.f90)
-.f90.o:
+%.o: %.f90
 	$(FC) -c -o $@ $(FFLAGS) $(INCLUDES) $<
-.c.o:
+%.o: %.c
 	$(CC) -c -o $@ $(CFLAGS) $(INCLUDES) $(CPPFLAGS) $<
-.cc.o:
+%.o: %.cc
 	$(CXX) -c -o $@ $(CXXFLAGS) $(INCLUDES) $(CPPFLAGS) $<
-.cpp.o:
+%.o: %.cpp
 	$(CXX) -c -o $@ $(CXXFLAGS) $(INCLUDES) $(CPPFLAGS) $<
 
 
