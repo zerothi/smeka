@@ -6,6 +6,10 @@ _SMEKA_smeka = 1
 # OS settings
 include $(TOP_DIR)/$(SMEKA_DIR)/Makefile.os
 
+# Default variables
+include $(TOP_DIR)/$(SMEKA_DIR)/Makefile.default
+
+
 # Common variables, needs pre-loading before the user
 # includes
 include $(TOP_DIR)/$(SMEKA_DIR)/Makefile.common

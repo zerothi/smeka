@@ -26,10 +26,6 @@ _SMEKA_SUFFIXES := $(_SMEKA_SUFFIXES) .f90 .F90 .c .cc .cpp
 # a common variable space, then subsequently grabbing
 # those needed.
 
-CFLAGS ?= 
-CXXFLAGS ?=
-FFLAGS ?=
-
 # Default vendor setting
 VENDOR ?= gnu
 
