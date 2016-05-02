@@ -45,9 +45,6 @@ include $(TOP_DIR)/$(SMEKA_DIR)/Makefile.doc
 # Add the distribution creation tool
 include $(TOP_DIR)/$(SMEKA_DIR)/Makefile.dist
 
-# Add the test directory make file
-include $(TOP_DIR)/$(SMEKA_DIR)/Makefile.test
-
 # Add the clean make file
 include $(TOP_DIR)/$(SMEKA_DIR)/Makefile.clean
 

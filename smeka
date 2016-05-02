@@ -65,7 +65,7 @@ _ERR_UNSET_PROJECT=3
 _cur_dir=$(full_path $(dirname $0))
 
 # Create a temporary directory ($$ == PID of current shell)
-_tmp_dir=$(mktemp -dt "$(basename $0).$$")
+_tmp_dir=$(mktemp -dt "$(basename $0).$$.XXXXXXXX")
 
 # Default clean-up utility
 function clean_up() {
