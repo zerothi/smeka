@@ -18,7 +18,7 @@ _SMEKA_compiler = 1
 # If a user requires other sources, they need
 # to add themselves.
 # smeka supports these files:
-_SMEKA_SUFFIXES = .f90 .F90 .c .cc .cpp
+_SMEKA_SUFFIXES += .f90 .F90 .c .cc .cpp
 
 # Default compiler options
 # I am a bit split whether we should make a "default"
