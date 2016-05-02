@@ -4,14 +4,22 @@ _SMEKA_directory = 1
 
 # Default directories
 PREFIX ?= $(HOME)/$(PROJECT_NAME)
-INC_DIR ?= $(PREFIX)/include      # Include directory (.h)
-FMOD_DIR ?= $(PREFIX)/$(INC_DIR)  # Module directory (.mod)
-BIN_DIR ?= $(PREFIX)/bin          # Executables
-LIB_DIR ?= $(PREFIX)/lib          # Library directory (.a/.so)
-SHARE_DIR ?= $(PREFIX)/share      # shared folder
-MAN_DIR ?= $(SHARE_DIR)/man       # Manual folder (man ***)
-PKG_DIR ?= $(LIB_DIR)/pkgconfig   # pkg-config files
-ETC_DIR ?= $(PREFIX)/etc          # additional files (settings etc.)
+# Include directory (.h)
+INC_DIR ?= $(PREFIX)/include
+# Module directory (.mod)
+FMOD_DIR ?= $(INC_DIR)
+# Executables
+BIN_DIR ?= $(PREFIX)/bin
+# Library directory (.a/.so)
+LIB_DIR ?= $(PREFIX)/lib
+# shared folder
+SHARE_DIR ?= $(PREFIX)/share
+# Manual folder (man ***)
+MAN_DIR ?= $(SHARE_DIR)/man
+# pkg-config files
+PKG_DIR ?= $(LIB_DIR)/pkgconfig
+# additional files (settings etc.)
+ETC_DIR ?= $(PREFIX)/etc
 
 
 # Print out settings from this file
