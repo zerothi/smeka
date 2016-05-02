@@ -1,12 +1,12 @@
 _SMEKA_install = 1
-.PHONY: install install_libraries install_init_dir uninstall show
+.PHONY: install install_libraries install_init_dir install_final uninstall 
 
 # Basic implementation of installing the different
 # libraries etc.
 
 
 .NOTPARALLEL: install
-install:: install_libraries
+install:: install_libraries install_final
 
 
 .NOTPARALLEL: install_libraries
@@ -16,9 +16,9 @@ install_libraries:: install_init_dir
 
 .NOTPARALLEL: install_init_dir
 install_init_dir::
-	@-mkdir -p $(INC_DIR)
-	@-mkdir -p $(LIB_DIR)
-	@-mkdir -p $(BIN_DIR)
+	-mkdir -p $(INC_DIR)
+	-mkdir -p $(LIB_DIR)
+	-mkdir -p $(BIN_DIR)
 
 
 # Issuing uninstall will forcefully remove the installation directory
@@ -29,10 +29,17 @@ uninstall::
 	@echo "  $(PREFIX)"
 	@echo "will be deleted!"
 	@echo "You may abort the operation within 2 secs by pressing:"
+	@echo ""
 	@echo "  Ctrl+C or ^C"
+	@echo ""
 	@sleep 2
 	@rm -rf $(PREFIX)
 
+
+# Simple way to ALWAYS do user defined stuff at the end
+.NOTPARALLEL: install_final
+.PHONY: install_final
+install_final::
 
 # Local Variables:
 #  mode: makefile-gmake
