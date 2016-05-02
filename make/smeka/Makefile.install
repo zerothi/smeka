@@ -11,7 +11,7 @@ install:: install_libraries
 
 .NOTPARALLEL: install_libraries
 install_libraries:: install_init_dir
-	install -pm$(_OCT_rwx_rx_rx) -t $(LIB_DIR) $(LIBRARIES)
+	install -pm $(_OCT_rwxrxrx) -t $(LIB_DIR) $(LIBRARIES)
 
 
 .NOTPARALLEL: install_init_dir
