@@ -3,6 +3,7 @@ _SMEKA_info = 1
 # Make target to inform user about
 # possible default env-vars that control the
 # smeka installation procedure
+.PHONY: smeka
 smeka:
 	@echo "Default smeka command line variables:"
 	@echo "  OPT=none|debug|weak|medium|hard"
