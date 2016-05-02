@@ -99,7 +99,7 @@ FC := $(V_FC)
 MPICC := $(V_MPICC)
 MPICXX := $(V_MPICXX)
 MPIFC := $(V_MPIFC)
-
+FC_MODDIR := $(V_FC_MODDIR)
 
 .NOTPARALLEL: show
 show::
