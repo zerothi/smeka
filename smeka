@@ -228,7 +228,7 @@ if [ $previous_smeka -eq 1 ]; then
     # Re-create the makefile with content of smeka
     tmp_make=$_tmp_dir/Makefile
     in_smeka=0
-    while read -r line
+    while IFS='' read -r line
     do
 	
 	case $line in
