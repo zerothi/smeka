@@ -67,7 +67,7 @@ ifneq ($(OPT),none)
   FFLAGS := $(filter-out $(_FILTER_OPT_FLAGS),$(FFLAGS))
 
   # Populate them
-  include $(TOP_DIR)/$(SMEKA_DIR)/vendor/$(CVENDOR).make
+  include $(TOP_DIR)/$(SMEKA_DIR)/vendor/$(C_VENDOR).make
   CFLAGS += $(V_CFLAGS_$(OPT))
 
   include $(TOP_DIR)/$(SMEKA_DIR)/vendor/$(CXX_VENDOR).make
@@ -125,7 +125,7 @@ show::
 
 # Define the default compilation options:
 %.o: %.F90
-	$(CPP) $(CPPFLAGS) $(FPPFLAGS) $< > $(<:.F90=_cpp.f90)
+	$(CPP) $(CPPFLAGS) $(FPPFLAGS) $(INCLUDES) $< > $(<:.F90=_cpp.f90)
 	$(FC) -c -o $@ $(FFLAGS) $(INCLUDES) $(<:.F90=_cpp.f90)
 %.o: %.f90
 	$(FC) -c -o $@ $(FFLAGS) $(INCLUDES) $<
