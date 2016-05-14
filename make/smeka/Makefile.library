@@ -11,9 +11,10 @@ ARFLAGS ?= -ru
 RANLIB ?= ranlib
 RANLIBFLAGS ?= 
 
-.PHONY: show
-.NOTPARALLEL: show
-show::
+
+.PHONY: smeka-show-lib
+.NOTPARALLEL: smeka-show-lib
+smeka-show-lib:
 	@echo ""
 	@echo "Linker (static)"
 	@echo "  AR      = $(AR)"
@@ -22,13 +23,14 @@ show::
 	@echo "  RANLIBFLAGS = $(RANLIBFLAGS)"
 	@echo "Linker (shared)"
 	@echo "  $(CC) -shared $(CFLAGS) $(LDFLAGS)"
+show: smeka-show-lib
 
 
 # Define the default library creation options
-%.a::
+%.a:
 	$(AR) $(ARFLAGS) $@ $^
 	$(RANLIB) $(RANLIBFLAGS) $@
-%.so::
+%.so:
 	$(CC) -shared -o $@ $(CFLAGS) $(LDFLAGS) $^
 
 

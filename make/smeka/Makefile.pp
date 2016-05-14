@@ -1,5 +1,4 @@
 _SMEKA_pp = 1
-.PHONY: show
 
 # This smeka file creates the preprocessor
 # settings.
@@ -25,12 +24,13 @@ endif
 ifeq ($(uname_S),Cygwin)
 endif
 
-.NOTPARALLEL: show
-show::
+.PHONY: smeka-show-pp
+.NOTPARALLEL: smeka-show-pp
+smeka-show-pp:
 	@echo "  CPP      = $(CPP)"
 	@echo "  CPPFLAGS = $(CPPFLAGS)"
 	@echo "  INCLUDES = $(INCLUDES)"
-
+show: smeka-show-pp
 
 # Local Variables:
 #  mode: makefile-gmake

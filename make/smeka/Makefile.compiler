@@ -1,5 +1,4 @@
 _SMEKA_compiler = 1
-.PHONY: show
 
 # This smeka file creates the compiler settings.
 #
@@ -101,8 +100,9 @@ MPICXX := $(V_MPICXX)
 MPIFC := $(V_MPIFC)
 FC_MODDIR := $(V_FC_MODDIR)
 
-.NOTPARALLEL: show
-show::
+.PHONY: smeka-show-compiler
+.NOTPARALLEL: smeka-show-compiler
+smeka-show-compiler:
 	@echo ""
 	@echo "Used compilation options (VENDOR=$(VENDOR)):"
 	@echo "  CC       = $(CC)"
@@ -121,7 +121,7 @@ show::
 	@echo "  MPIFC    = $(MPIFC)"
 	@echo "  FFLAGS   = $(FFLAGS)"
 	@echo ""
-
+show: smeka-show-compiler
 
 # Define the default compilation options:
 %.o: %.F90

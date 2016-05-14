@@ -1,9 +1,9 @@
 _SMEKA_doc = 1
-.PHONY: doc
 
 # Create documentation.
 # Currently this should be user defined
-doc::
+.PHONY: doc
+doc:
 
 
 # Local Variables:

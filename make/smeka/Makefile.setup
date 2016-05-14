@@ -1,5 +1,4 @@
 _SMEKA_setup = 1
-.PHONY: settings setup-list
 
 # This smeka file has two purposes:
 #
@@ -31,9 +30,11 @@ _SMEKA_setup = 1
 ifneq ("$(wildcard setup.make)","")
 
 include setup.make
-settings::
+.PHONY: smeka-settings-setup.make
+smeka-settings-setup.make:
 	@echo "Using make settings in:"
 	@echo "  setup.make"
+settings: smeka-settings-setup.make
 
 endif
 
@@ -68,21 +69,24 @@ include $(SETUP)
 
 
 # Add print-out to target
-settings::
+.PHONY: smeka-settings-custom
+smeka-settings-custom: 
 	@echo ""
 	@echo "Using custom settings:"
 	@echo "  $(SETUP)"
 	@echo ""
+settings: smeka-settings-custom
 
 endif # only check if SETUP is defined
 
 
 # Target for displaying available SETUP=<>
-setup-list::
+.PHONY: smeka-setup-list
+smeka-setup-list:
 	@echo ""
 	$(info Available SETUP arguments are:$(_NL)$(subst .make,,$(subst ./$(SMEKA_DIR)/setup/,$(_NL)  ,$(wildcard ./$(SMEKA_DIR)/setup/*.make))))
 	@echo ""
-
+setup-list: smeka-setup-list
 
 
 # Local Variables:

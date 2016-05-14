@@ -3,8 +3,8 @@ _SMEKA_info = 1
 # Make target to inform user about
 # possible default env-vars that control the
 # smeka installation procedure
-.PHONY: smeka
-smeka:
+.PHONY: smeka-info
+smeka-info:
 	@echo "Default smeka command line variables:"
 	@echo ""
 	@echo "  OPT=none|debug|weak|medium|hard"
@@ -21,7 +21,7 @@ smeka:
 	@echo "    includes <file> in the Makefile project"
 	@echo "    this may hold any custom changes to the build system"
 	@echo ""
-
+smeka: smeka-info
 
 # Local Variables:
 #  mode: makefile-gmake

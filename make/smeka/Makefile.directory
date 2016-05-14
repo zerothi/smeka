@@ -1,5 +1,4 @@
 _SMEKA_directory = 1
-.PHONY: settings
 
 
 # Default directories
@@ -23,7 +22,8 @@ ETC_DIR ?= $(PREFIX)/etc
 
 
 # Print out settings from this file
-settings::
+.PHONY: smeka-settings-dir
+smeka-settings-dir:
 	@echo "Directory settings:"
 	@echo "Prefix            (PREFIX) : $(PREFIX)"
 	@echo "Includes         (INC_DIR) : $(INC_DIR)"
@@ -34,7 +34,7 @@ settings::
 	@echo "Man              (MAN_DIR) : $(MAN_DIR)"
 	@echo "pkg-config       (PKG_DIR) : $(PKG_DIR)"
 	@echo "etc.             (ETC_DIR) : $(ETC_DIR)"
-
+settings: smeka-settings-dir
 
 # Local Variables:
 #  mode: makefile-gmake
