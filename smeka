@@ -279,7 +279,8 @@ elif [ -z "_project" ]; then
 else
 
     # The Makefile does not exist, copy it
-    cp $_cur_dir/make/Makefile Makefile
+    sed -e "s:%%SMEKA_DIR%%:$_smeka_dir:" \
+	   $_cur_dir/make/Makefile >> Makefile
     
 fi
 
