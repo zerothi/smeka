@@ -8,6 +8,10 @@ _SMEKA_cpp = 1
 #  it works)
 CPP ?= cpp
 # Sadly there are many variations of CPP
+#   -C is needed to disregard C-comments (the operator // is a comment!?!)
+#   -nostdinc is needed to not include standard includes (which are C comments)
+#   -E only preprocess, do not try and compile
+#   -P do not add line markers
 # clang-3.5 (MacOSx): -E -EP -xc
 # clang-3.7> (MacOSx): -E -P -x c
 # cpp(gnu): -E -P -x c -nostdinc

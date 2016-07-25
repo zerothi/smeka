@@ -14,8 +14,9 @@ FFLAGS =
 #  cpp -E -x c
 #  cpp -E -P -C -nostdinc
 #  clang -E -x c
+#  clang -E -P(-EP<=3.5) -x c
 CPP = cpp 
-CPPFLAGS = -E -x c
+CPPFLAGS = -E -P -x c
 
 AR = ar
 ARFLAGS = -ru
