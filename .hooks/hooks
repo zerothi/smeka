@@ -8,10 +8,10 @@ pushd $head
 
 for f in .hooks/*
 do
-    if [ "$f" != "$0" ]; then
-        chmod u+x $f
-        ln -sf $f .git/hooks/$(basename $f)
-    fi
+    bf=$(basename $f)
+    chmod u+x $f
+    ln -sf $head/$f $head/.git/hooks/$bf
+    ls -l $head/.git/hooks/$bf
 done
 
 popd

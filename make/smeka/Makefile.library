@@ -24,8 +24,8 @@ smeka-show-lib:
 	@echo "Linker (shared)"
 	@echo "  $(CC) -shared $(CFLAGS) $(LIBS) $(LDFLAGS)"
 	@echo ""
-	@echo " LIBS    = $(LIBS)"
-	@echo " LDFLAGS = $(LDFLAGS)"
+	@echo "  LIBS    = $(LIBS)"
+	@echo "  LDFLAGS = $(LDFLAGS)"
 
 show: smeka-show-lib
 
