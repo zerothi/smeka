@@ -17,6 +17,10 @@ FFLAGS =
 #  clang -E -P(-EP<=3.5) -x c
 CPP = cpp -E -P -x c
 CPPFLAGS = 
+FPPFLAGS =
+
+# Default to not pre-process Fortran files
+SMEKA_CPP_F = 0
 
 AR = ar
 ARFLAGS = -ru

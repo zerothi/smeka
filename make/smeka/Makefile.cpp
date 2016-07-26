@@ -16,6 +16,8 @@ _SMEKA_cpp = 1
 # cpp(gnu): -E -P -x c -nostdinc
 CPP ?= cpp -E -P -x c
 CPPFLAGS ?=
+FPPFLAGS ?=
+
 
 ifeq ($(uname_S),Linux)
 endif
@@ -32,11 +34,13 @@ endif
 ifeq ($(uname_S),Cygwin)
 endif
 
+
 .PHONY: smeka-show-cpp
 .NOTPARALLEL: smeka-show-cpp
 smeka-show-cpp:
 	@echo "  CPP      = $(CPP)"
 	@echo "  CPPFLAGS = $(CPPFLAGS)"
+	@echo "  FPPFLAGS = $(FPPFLAGS)"
 	@echo "  INCLUDES = $(INCLUDES)"
 show: smeka-show-cpp
 
