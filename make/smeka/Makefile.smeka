@@ -1,7 +1,7 @@
 _SMEKA_smeka = 1
 
 # Smeka version
-SMEKA_VERSION = 0.1
+SMEKA_VERSION = ace855f
 
 .PHONY: smeka-show-smeka-version
 .NOTPARALLEL: smeka-show-smeka-version

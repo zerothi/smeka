@@ -7,9 +7,13 @@
 #
 # To enable this hook, rename this file to "pre-commit".
 
-version=`git describe --always --tag`
+# Redirect output to stderr.
+exec 1>&2
 
-exec sed -i -e "s/^\(SMEKA_VERSION\).*/\1 = $version/" make/smeka/Makefile.smeka
+version=`git describe --always --tag`
+echo "Fixing version for smeka ($version)"
+
+sed -i -e "s/^\(SMEKA_VERSION\).*/\1 = $version/" make/smeka/Makefile.smeka 
 retval=$?
 if [ $retval -ne 0 ]; then
     echo "Could not insert the smeka-version"
