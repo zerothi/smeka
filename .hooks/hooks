@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Get the top level of the git-repo
+head=`git rev-parse --show-toplevel`
+
+# Go to the top of the git-repo
+pushd $head
+
+for f in .hooks/*
+do
+    if [ "$f" != "$0" ]; then
+        chmod u+x $f
+        ln -sf $f .git/hooks/$(basename $f)
+    fi
+done
+
+popd

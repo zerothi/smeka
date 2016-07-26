@@ -1,5 +1,16 @@
 _SMEKA_smeka = 1
 
+# Smeka version
+SMEKA_VERSION = 0.1
+.PHONY: smeka-show-smeka-version
+.NOTPARALLEL: smeka-show-smeka-version
+smeka-show-smeka-version:
+	@echo ""
+	@echo "SMEKA-version = $(SMEKA_VERSION)"
+	@echo ""
+show: smeka-show-smeka-version
+
+
 # Reset the suffixes
 .SUFFIXES:
 
