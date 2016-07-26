@@ -23,6 +23,10 @@ smeka-show-lib:
 	@echo "  RANLIBFLAGS = $(RANLIBFLAGS)"
 	@echo "Linker (shared)"
 	@echo "  $(CC) -shared $(CFLAGS) $(LIBS) $(LDFLAGS)"
+	@echo ""
+	@echo " LIBS    = $(LIBS)"
+	@echo " LDFLAGS = $(LDFLAGS)"
+
 show: smeka-show-lib
 
 
