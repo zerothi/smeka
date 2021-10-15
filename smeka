@@ -12,7 +12,6 @@ function print_help() {
     echo "Usage: $0 [options]"
     echo ""
     echo "Required options:"
-    echo "  --directory"
     echo "  --project (if performed on fresh project)"
     echo ""
     echo "Options:"
@@ -94,7 +93,7 @@ _project_dir_smeka=0 # 0 = false, 1 = true
 # Options that are REQUIRED to be
 # set by the user.
 _project=
-_directory=
+_directory=.
 
 while [ $# -gt 0 ]
 do
